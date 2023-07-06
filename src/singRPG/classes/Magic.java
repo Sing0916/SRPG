@@ -4,70 +4,70 @@ import singRPG.constant.enums.BuffType;
 import singRPG.constant.enums.MagicType;
 
 public class Magic {
-    double AMT = 1;
-    double COST = 1;
-    String name = "empty magic";
-    int chance = 1;// 0-9
-    MagicType Mtype;
-    BuffType Btype;
+    MagicType magicType;
+    BuffType bufftype;
+    double cost;
+    double amount;
+    String name;
+    int chance;// 0-9
 
-    public Magic(double d, double c, String n, int ch, MagicType t, BuffType t2) {
-        AMT = d;
-        COST = c;
-        name = n;
-        chance = ch;
-        Mtype = t;
-        Btype = t2;
+    public Magic() {
     }
 
-    Magic() {
-    }
-
-    public double getAMT() {
-        return AMT;
-    }
-
-    public void setAMT(double d) {
-        AMT = d;
-    }
-
-    public double getCOST() {
-        return COST;
-    }
-
-    public void setCOST(double c) {
-        COST = c;
-    }
-
-    public String getNAME() {
-        return name;
-    }
-
-    public void setNAME(String n) {
-        name = n;
-    }
-
-    public int getChance() {
-        return chance;
-    }
-
-    public void setChance(int c) {
-        chance = c;
+    public Magic(MagicType magicType, BuffType bufftype, double cost, double amount, String name, int chance) {
+        this.magicType = magicType;
+        this.bufftype = bufftype;
+        this.cost = cost;
+        this.amount = amount;
+        this.name = name;
+        this.chance = chance;
     }
 
     public MagicType getMagicType() {
-        return Mtype;
+        return this.magicType;
     }
 
-    public void setMagicType(MagicType t) {
-        Mtype = t;
+    public void setMagicType(MagicType magicType) {
+        this.magicType = magicType;
     }
 
-    public BuffType getBuffType() {
-        return Btype;
+    public BuffType getBufftype() {
+        return this.bufftype;
     }
 
-    public void setBuffType(BuffType t) {
-        Btype = t;
+    public void setBufftype(BuffType bufftype) {
+        this.bufftype = bufftype;
+    }
+
+    public double getCost() {
+        return this.cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
+    public double getAmount() {
+        return this.amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getChance() {
+        return this.chance;
+    }
+
+    public void setChance(int chance) {
+        this.chance = chance;
     }
 }

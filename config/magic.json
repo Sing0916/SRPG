@@ -1,1 +1,50 @@
-{"magics":[{"MagicType":"DMG","BuffType":"NULL","Cost":5.0,"Amount":10.0,"Name":"Fire Ball","Chance":9},{"MagicType":"DMG","BuffType":"NULL","Cost":10.0,"Amount":20.0,"Name":"Thunder Strike","Chance":6},{"MagicType":"DMG","BuffType":"NULL","Cost":25.0,"Amount":50.0,"Name":"Shadow Claw","Chance":3},{"MagicType":"HEAL","BuffType":"NULL","Cost":10.0,"Amount":20.0,"Name":"Heal","Chance":9},{"MagicType":"BUFF","BuffType":"ATK","Cost":10.0,"Amount":10.0,"Name":"Power Up","Chance":9},{"MagicType":"DMG","BuffType":"NULL","Cost":0.0,"Amount":99999.0,"Name":"Judgement","Chance":9}],"number":6}
+[
+  {
+    "magicType": "DMG",
+    "bufftype": "NULL",
+    "cost": 5.0,
+    "amount": 10.0,
+    "name": "Fire Ball",
+    "chance": 9
+  },
+  {
+    "magicType": "DMG",
+    "bufftype": "NULL",
+    "cost": 10.0,
+    "amount": 20.0,
+    "name": "Thunder Strike",
+    "chance": 6
+  },
+  {
+    "magicType": "DMG",
+    "bufftype": "NULL",
+    "cost": 25.0,
+    "amount": 50.0,
+    "name": "Shadow Claw",
+    "chance": 3
+  },
+  {
+    "magicType": "HEAL",
+    "bufftype": "NULL",
+    "cost": 10.0,
+    "amount": 20.0,
+    "name": "Heal",
+    "chance": 9
+  },
+  {
+    "magicType": "BUFF",
+    "bufftype": "ATK",
+    "cost": 10.0,
+    "amount": 10.0,
+    "name": "Power Up",
+    "chance": 9
+  },
+  {
+    "magicType": "DMG",
+    "bufftype": "NULL",
+    "cost": 0.0,
+    "amount": 99999.0,
+    "name": "Judgement",
+    "chance": 9
+  }
+]

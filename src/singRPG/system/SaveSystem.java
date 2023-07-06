@@ -29,6 +29,10 @@ public class SaveSystem {
         return array;
     }
 
+    public static void convertGson() {
+
+    }
+
     public static String[] getPlayerList() throws FileNotFoundException, IOException, ParseException {
         String names[] = new String[playerNum];
         for (int i = 0; i < playerNum; i++) {
