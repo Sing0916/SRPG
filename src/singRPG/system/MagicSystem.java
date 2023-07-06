@@ -19,25 +19,6 @@ public class MagicSystem {
     static Scanner scan = new Scanner(System.in);
     static Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
 
-    public static void convertGson() {
-        Magic[] magics = new Magic[6];
-        magics[0] = new Magic(MagicType.DMG, BuffType.NULL, 5.0, 10.0, "Fire Ball", 9);
-        magics[1] = new Magic(MagicType.DMG, BuffType.NULL, 10.0, 20.0, "Thunder Strike", 6);
-        magics[2] = new Magic(MagicType.DMG, BuffType.NULL, 25.0, 50.0, "Shadow Claw", 3);
-        magics[3] = new Magic(MagicType.HEAL, BuffType.NULL, 10.0, 20.0, "Heal", 9);
-        magics[4] = new Magic(MagicType.BUFF, BuffType.ATK, 10.0, 10.0, "Power Up", 9);
-        magics[5] = new Magic(MagicType.DMG, BuffType.NULL, 0.0, 99999.0, "Judgement", 9);
-
-        System.out.println(gson.toJson(magics, Magic[].class));
-        try {
-            FileWriter file = new FileWriter("config/magic.json");
-            gson.toJson(magics, Magic[].class, file);
-            file.flush();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public static Magic[] readMagic() throws FileNotFoundException, IOException,
             ParseException {
         FileReader file = new FileReader("config/magic.json");

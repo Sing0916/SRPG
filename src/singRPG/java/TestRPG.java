@@ -23,8 +23,7 @@ public class TestRPG {
             System.out.println("[1] Create new player");
             System.out.println("[2] Create Magic");
             System.out.println("[3] List Magic");
-            System.out.println("[4] Convert to GSON");
-            int userAction = Util.checkUserAction(1, 4);
+            int userAction = Util.checkUserAction(1, 3);
             switch (userAction) {
                 case 1:
                     SaveSystem.create();
@@ -66,9 +65,6 @@ public class TestRPG {
                         }
                     }
                     Util.pressAnyKey();
-                    break;
-                case 4:
-                    SaveSystem.convertGson();
                     break;
             }
             Util.pressAnyKey();

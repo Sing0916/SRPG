@@ -17,19 +17,6 @@ public class SaveSystem {
     static Scanner scan = new Scanner(System.in);
     static Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
 
-    public static void convertGson() {
-        Player[] players = new Player[2];
-        players[0] = new Player(100, 10, 10, 10, 10, 100, "Gins", true, 100);
-        players[1] = new Player(99999, 99999, 99999, 99999, 99999, 99999, "God", true, 9999999);
-        try {
-            FileWriter file = new FileWriter("save/players.json");
-            gson.toJson(players, Player[].class, file);
-            file.flush();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public static String[] getPlayerList() throws FileNotFoundException, IOException {
         FileReader file = new FileReader("save/players.json");
         Player[] players = gson.fromJson(file, Player[].class);
