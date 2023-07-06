@@ -12,19 +12,17 @@ import singRPG.system.Util;
 
 class RPG {
     static Scanner scan = new Scanner(System.in);
-    static String array[];
+    static final String name = "SRPG";
     static int userAction = -1;
 
     public static void main(String[] args) throws ParseException, FileNotFoundException, IOException {
         Util.clearScreen();
-        array = SaveSystem.readConfig();
-        SaveSystem.update();
+        Player[] players = SaveSystem.read();
 
         // loop game
         outer: while (true) {
             Util.printLine();
-            System.out.println("Welcome to " + array[0]);
-            System.out.println("Version: " + array[1]);
+            System.out.println("Welcome to " + name);
             Util.printLine();
             System.out.println("[1] Start");
             System.out.println("[2] Load");
@@ -53,9 +51,9 @@ class RPG {
                 Util.clearScreen();
                 continue outer;
             }
-            Player player = SaveSystem.read(userAction);
-            Unit enemy = new Unit(100, 5, 5, 0, 0, "Wolf", false, (player.getLevel() - (Math.random() * 15 + 1)) * 100);
-            Game game = new Game(player, enemy);
+            Unit enemy = new Unit(100, 5, 5, 0, 0, "Wolf", false,
+                    (players[userAction].getLevel() - (Math.random() * 15 + 1)) * 100);
+            Game game = new Game(players[userAction], enemy);
             Util.clearScreen();
 
             // game start
@@ -66,9 +64,10 @@ class RPG {
                 System.out.println("You lose!");
 
             // game end
-            player.updateLV();
-            System.out.println("EXP: " + (int) player.getEXP() + "/" + (int) (player.getLevel() + 1) * 100);
-            SaveSystem.write(player, userAction);
+            players[userAction].updateLV();
+            System.out.println("EXP: " + (int) players[userAction].getExp() + "/"
+                    + (int) (players[userAction].getLevel() + 1) * 100);
+            SaveSystem.write(players);
             Util.pressAnyKey();
             Util.clearScreen();
         }

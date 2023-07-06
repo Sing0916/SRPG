@@ -4,19 +4,19 @@ import singRPG.constant.enums.BuffType;
 import singRPG.constant.enums.DmgType;
 
 public class Unit {
-    double HP = 1;
-    double ATK = 1;
-    double DEF = 1;
-    double MATK = 1;
-    double MDEF = 1;
+    double hp = 1;
+    double atk = 1;
+    double def = 1;
+    double matk = 1;
+    double mdef = 1;
 
-    double maxHP = 1;
-    double oATK = 1;
-    double oDEF = 1;
-    double oMATK = 1;
-    double oMDEF = 1;
+    double maxHp = 1;
+    double oAtk = 1;
+    double oDef = 1;
+    double oMatk = 1;
+    double oMdef = 1;
 
-    double baseHP = 1;
+    double baseHp = 1;
     double exp = 0;
     double level = 0;
 
@@ -29,24 +29,24 @@ public class Unit {
 
     public Unit(double health, double attack, double Defence, double mattack, double mdefence, String n,
             boolean isPlayer, double EXP) {
-        maxHP = health + 10 * Math.floor(EXP / 100);
-        oATK = attack;
-        oDEF = Defence;
-        oMATK = mattack;
-        oMDEF = mdefence;
+        maxHp = health + 10 * Math.floor(EXP / 100);
+        oAtk = attack;
+        oDef = Defence;
+        oMatk = mattack;
+        oMdef = mdefence;
 
-        HP = maxHP;
-        ATK = oATK + 1 * Math.floor(EXP / 100);
-        DEF = oDEF + 1 * Math.floor(EXP / 100);
-        MATK = oMATK + 1 * Math.floor(EXP / 100);
-        MDEF = oMDEF + 1 * Math.floor(EXP / 100);
+        hp = maxHp;
+        atk = oAtk + 1 * Math.floor(EXP / 100);
+        def = oDef + 1 * Math.floor(EXP / 100);
+        matk = oMatk + 1 * Math.floor(EXP / 100);
+        mdef = oMdef + 1 * Math.floor(EXP / 100);
 
         if (EXP <= 0)
             exp = 0;
         else
             exp = EXP;
         level = Math.floor(exp / 100);
-        baseHP = health;
+        baseHp = health;
         name = n;
         if (isPlayer)
             isEnemy = false;
@@ -56,8 +56,8 @@ public class Unit {
         double tmp = level;
         level = Math.floor(exp / 100);
         if (tmp != level) {
-            maxHP = baseHP + 10 * level;
-            HP = maxHP;
+            maxHp = baseHp + 10 * level;
+            hp = maxHp;
             System.out.println("Level up! " + tmp + " -> " + level);
         }
     }
@@ -70,28 +70,28 @@ public class Unit {
         } else {
             switch (type) {
                 case PHY:
-                    dmgDeal = dmg - DEF;
+                    dmgDeal = dmg - def;
                     if (dmgDeal > 0)
-                        if (dmgDeal < HP)
-                            HP -= dmgDeal;
+                        if (dmgDeal < hp)
+                            hp -= dmgDeal;
                         else {
-                            dmgDeal = HP;
-                            HP = 0;
+                            dmgDeal = hp;
+                            hp = 0;
                         }
                     break;
                 case MAG:
-                    dmgDeal = dmg - MDEF;
+                    dmgDeal = dmg - mdef;
                     if (dmgDeal > 0)
-                        if (dmgDeal < HP)
-                            HP -= dmgDeal;
+                        if (dmgDeal < hp)
+                            hp -= dmgDeal;
                         else {
-                            dmgDeal = HP;
-                            HP = 0;
+                            dmgDeal = hp;
+                            hp = 0;
                         }
                     break;
                 case TRE:
                     dmgDeal = dmg;
-                    HP -= dmgDeal;
+                    hp -= dmgDeal;
                     break;
             }
             return dmgDeal;
@@ -100,32 +100,42 @@ public class Unit {
 
     public double heal(double h) {
         double healAMT = 0;
-        if ((maxHP - HP) >= h) {
+        if ((maxHp - hp) >= h) {
             healAMT = h;
-            HP += healAMT;
+            hp += healAMT;
         } else {
-            healAMT = maxHP - HP;
-            HP += healAMT;
+            healAMT = maxHp - hp;
+            hp += healAMT;
         }
         return healAMT;
+    }
+
+    public double atkUp() {
+        atk += 5;
+        return atk;
+    }
+
+    public double defUP() {
+        def += 5;
+        return def;
     }
 
     public void buff(double a, BuffType t) {
         switch (t) {
             case ATK:
-                ATK += a;
+                atk += a;
                 break;
             case DEF:
-                DEF += a;
+                def += a;
                 break;
             case MATK:
-                MATK += a;
+                matk += a;
                 break;
             case MDEF:
-                MDEF += a;
+                mdef += a;
                 break;
             case HP:
-                HP += a;
+                hp += a;
                 break;
             case NULL:
                 break;
@@ -136,133 +146,140 @@ public class Unit {
         shielded = true;
     }
 
-    public double defUP() {
-        DEF += 2;
-        return DEF;
+    public double getHp() {
+        return this.hp;
     }
 
-    public double pwrUp() {
-        ATK += 5;
-        return ATK;
+    public void setHp(double hp) {
+        this.hp = hp;
     }
 
-    public void setHP(double health) {
-        HP = health;
+    public double getAtk() {
+        return this.atk;
     }
 
-    public double getHP() {
-        return HP;
+    public void setAtk(double atk) {
+        this.atk = atk;
     }
 
-    public void setATK(double attack) {
-        ATK = attack;
+    public double getDef() {
+        return this.def;
     }
 
-    public double getATK() {
-        return ATK;
+    public void setDef(double def) {
+        this.def = def;
     }
 
-    public void setDEF(double DEFence) {
-        DEF = DEFence;
+    public double getMatk() {
+        return this.matk;
     }
 
-    public double getDEF() {
-        return DEF;
+    public void setMatk(double matk) {
+        this.matk = matk;
     }
 
-    public void setNAME(String n) {
-        name = n;
+    public double getMdef() {
+        return this.mdef;
     }
 
-    public String getNAME() {
-        return name;
+    public void setMdef(double mdef) {
+        this.mdef = mdef;
     }
 
-    public void setMaxHP(double health) {
-        maxHP = health;
+    public double getMaxHp() {
+        return this.maxHp;
     }
 
-    public double getMaxHP() {
-        return maxHP;
+    public void setMaxHp(double maxHp) {
+        this.maxHp = maxHp;
     }
 
-    public void setIsEnemy(boolean t) {
-        isEnemy = t;
+    public double getOAtk() {
+        return this.oAtk;
     }
 
-    public boolean getIsEnemy() {
-        return isEnemy;
+    public void setOAtk(double oAtk) {
+        this.oAtk = oAtk;
     }
 
-    public void setMATK(double mATK) {
-        MATK = mATK;
+    public double getODef() {
+        return this.oDef;
     }
 
-    public double getMATK() {
-        return MATK;
+    public void setODef(double oDef) {
+        this.oDef = oDef;
     }
 
-    public void setMDEF(double mDEF) {
-        MDEF = mDEF;
+    public double getOMatk() {
+        return this.oMatk;
     }
 
-    public double getMDEF() {
-        return MDEF;
+    public void setOMatk(double oMatk) {
+        this.oMatk = oMatk;
     }
 
-    public void setOATK(double attack) {
-        oATK = attack;
+    public double getOMdef() {
+        return this.oMdef;
     }
 
-    public double getOATK() {
-        return oATK;
+    public void setOMdef(double oMdef) {
+        this.oMdef = oMdef;
     }
 
-    public void setODEF(double DEFence) {
-        oDEF = DEFence;
+    public double getBaseHp() {
+        return this.baseHp;
     }
 
-    public double getODEF() {
-        return oDEF;
+    public void setBaseHp(double baseHp) {
+        this.baseHp = baseHp;
     }
 
-    public void setOMATK(double mATK) {
-        oMATK = mATK;
+    public double getExp() {
+        return this.exp;
     }
 
-    public double getOMATK() {
-        return oMATK;
-    }
-
-    public void setOMDEF(double mDEF) {
-        oMDEF = mDEF;
-    }
-
-    public double getOMDEF() {
-        return oMDEF;
-    }
-
-    public void setEXP(double EXP) {
-        exp = EXP;
-    }
-
-    public double getEXP() {
-        return exp;
-    }
-
-    public void setBaseHP(double hp) {
-        baseHP = hp;
-    }
-
-    public double getBaseHP() {
-        return baseHP;
-    }
-
-    public void setLevel(double lv) {
-        level = lv;
+    public void setExp(double exp) {
+        this.exp = exp;
     }
 
     public double getLevel() {
-        return level;
+        return this.level;
     }
+
+    public void setLevel(double level) {
+        this.level = level;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isIsEnemy() {
+        return this.isEnemy;
+    }
+
+    public boolean getIsEnemy() {
+        return this.isEnemy;
+    }
+
+    public void setIsEnemy(boolean isEnemy) {
+        this.isEnemy = isEnemy;
+    }
+
+    public boolean isShielded() {
+        return this.shielded;
+    }
+
+    public boolean getShielded() {
+        return this.shielded;
+    }
+
+    public void setShielded(boolean shielded) {
+        this.shielded = shielded;
+    }
+
 }

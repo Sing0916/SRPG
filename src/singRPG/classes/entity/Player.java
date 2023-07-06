@@ -1,16 +1,16 @@
 package singRPG.classes.entity;
 
 public class Player extends Unit {
-    double MP = 50;
-    double maxMP = 50;
-    double baseMP = 50;
+    double mp = 50;
+    double maxMp = 50;
+    double baseMp = 50;
 
     public Player(double health, double attack, double Defence, double mattack, double mdefence, double mp, String n,
             boolean isPlayer, double EXP) {
         super(health, attack, Defence, mattack, mdefence, n, isPlayer, EXP);
-        baseMP = mp;
-        maxMP = mp + 5 * Math.floor(EXP / 100);
-        MP = maxMP;
+        baseMp = mp;
+        maxMp = mp + 5 * Math.floor(EXP / 100);
+        mp = maxMp;
     }
 
     public Player() {
@@ -18,30 +18,30 @@ public class Player extends Unit {
     }
 
     public void useMagic(double c) {
-        MP -= c;
+        mp -= c;
     }
 
-    public void setMP(double mp) {
-        MP = mp;
+    public double getMp() {
+        return this.mp;
     }
 
-    public double getMP() {
-        return MP;
+    public void setMp(double mp) {
+        this.mp = mp;
     }
 
-    public void setMaxMP(double mp) {
-        maxMP = mp;
+    public double getMaxMp() {
+        return this.maxMp;
     }
 
-    public double getMaxMP() {
-        return maxMP;
+    public void setMaxMp(double maxMp) {
+        this.maxMp = maxMp;
     }
 
-    public void setBaseMP(double mp) {
-        baseMP = mp;
+    public double getBaseMp() {
+        return this.baseMp;
     }
 
-    public double getBaseMP() {
-        return baseMP;
+    public void setBaseMp(double baseMp) {
+        this.baseMp = baseMp;
     }
 }

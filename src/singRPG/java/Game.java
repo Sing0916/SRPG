@@ -49,16 +49,16 @@ public class Game {
                 Util.clearScreen();
                 continue userLoop;
             }
-            if ((enemy.getHP() <= 0)) {
+            if ((enemy.getHp() <= 0)) {
                 System.out.println("Enemy is dead!");
-                player.setEXP(player.getEXP() + (player.getLevel() - enemy.getLevel()) * 15);
+                player.setExp(player.getExp() + (player.getLevel() - enemy.getLevel()) * 15);
                 return true;
             }
 
             // enemy action
             int r = (int) (Math.random() * 4);
             enemyAction(r, enemy, player);
-            if ((player.getHP() <= 0)) {
+            if ((player.getHp() <= 0)) {
                 System.out.println("You are dead!");
                 return false;
             }
@@ -67,8 +67,8 @@ public class Game {
             counter++;
             Util.pressAnyKey();
             Util.clearScreen();
-            if (player.getMP() < 50)
-                player.setMP(player.getMP() + 5);
+            if (player.getMp() < 50)
+                player.setMp(player.getMp() + 5);
         }
     }
 
@@ -79,13 +79,13 @@ public class Game {
                 // normal attack
                 Util.clearScreen();
                 Util.printLine();
-                tmp = to.takeDMG(from.getATK(), DmgType.PHY);
-                System.out.println(from.getNAME() + " used Attack!");
+                tmp = to.takeDMG(from.getAtk(), DmgType.PHY);
+                System.out.println(from.getName() + " used Attack!");
                 if (tmp > 0)
-                    System.out.println(to.getNAME() + " takes " + (int) tmp + " damage!");
+                    System.out.println(to.getName() + " takes " + (int) tmp + " damage!");
                 else
-                    System.out.println(to.getNAME() + " takes 0 damage!");
-                System.out.println(to.getNAME() + " current HP is " + (int) to.getHP());
+                    System.out.println(to.getName() + " takes 0 damage!");
+                System.out.println(to.getName() + " current HP is " + (int) to.getHp());
                 break;
             case 2:
                 // magic
@@ -128,35 +128,35 @@ public class Game {
                 Util.clearScreen();
                 Util.printLine();
                 if (userAction == 898) {
-                    System.out.println(from.getNAME() + " used cheats!");
-                    tmp = to.takeDMG(to.getHP(), DmgType.TRE);
-                    System.out.println(to.getNAME() + " takes " + (int) tmp + " damage!");
+                    System.out.println(from.getName() + " used cheats!");
+                    tmp = to.takeDMG(to.getHp(), DmgType.TRE);
+                    System.out.println(to.getName() + " takes " + (int) tmp + " damage!");
                 } else {
                     System.out.println(
-                            from.getNAME() + " used " + magics[menuCount * 3 + userAction - 2].getNAME() + "!");
+                            from.getName() + " used " + magics[menuCount * 3 + userAction - 2].getName() + "!");
                     switch (magics[menuCount * 3 + userAction - 2].getMagicType()) {
                         case DMG:
                             int r = (int) (Math.random() * 10);
                             if (r <= magics[menuCount * 3 + userAction - 2].getChance()) {
-                                tmp = to.takeDMG(magics[menuCount * 3 + userAction - 2].getAMT(), DmgType.MAG);
-                                from.useMagic(magics[menuCount * 3 + userAction - 2].getCOST());
+                                tmp = to.takeDMG(magics[menuCount * 3 + userAction - 2].getAmount(), DmgType.MAG);
+                                from.useMagic(magics[menuCount * 3 + userAction - 2].getCost());
                             } else
                                 tmp = 0;
                             if (tmp > 0)
-                                System.out.println(to.getNAME() + " takes " + (int) tmp + " damage!");
+                                System.out.println(to.getName() + " takes " + (int) tmp + " damage!");
                             else
-                                System.out.println(from.getNAME() + "'s Magic missed!");
-                            System.out.println(to.getNAME() + " current HP is " + (int) to.getHP());
+                                System.out.println(from.getName() + "'s Magic missed!");
+                            System.out.println(to.getName() + " current HP is " + (int) to.getHp());
                             break;
                         case HEAL:
-                            double amt = from.heal(magics[menuCount * 3 + userAction - 2].getAMT());
+                            double amt = from.heal(magics[menuCount * 3 + userAction - 2].getAmount());
                             System.out
-                                    .println(from.getNAME() + " healed for " + (int) amt + " HP!");
-                            System.out.println(from.getNAME() + " current HP is " + (int) to.getHP());
+                                    .println(from.getName() + " healed for " + (int) amt + " HP!");
+                            System.out.println(from.getName() + " current HP is " + (int) to.getHp());
                             break;
                         case BUFF:
-                            from.buff(magics[menuCount * 3 + userAction - 2].getAMT(),
-                                    magics[menuCount * 3 + userAction - 2].getBuffType());
+                            from.buff(magics[menuCount * 3 + userAction - 2].getAmount(),
+                                    magics[menuCount * 3 + userAction - 2].getBufftype());
                             break;
                     }
                 }
@@ -166,8 +166,8 @@ public class Game {
                 Util.clearScreen();
                 Util.printLine();
                 from.shield();
-                System.out.println(from.getNAME() + " used Defence!");
-                System.out.println(from.getNAME() + " shielded himself");
+                System.out.println(from.getName() + " used Defence!");
+                System.out.println(from.getName() + " shielded himself");
                 break;
         }
         Util.printLine();
@@ -184,35 +184,35 @@ public class Game {
         switch (input) {
             case 0:
                 // normal attack
-                tmp = to.takeDMG(from.getATK(), DmgType.PHY);
-                System.out.println(from.getNAME() + " used Attack!");
+                tmp = to.takeDMG(from.getAtk(), DmgType.PHY);
+                System.out.println(from.getName() + " used Attack!");
                 if (tmp > 0)
-                    System.out.println(to.getNAME() + " takes " + (int) tmp + " damage!");
+                    System.out.println(to.getName() + " takes " + (int) tmp + " damage!");
                 else
-                    System.out.println(to.getNAME() + " takes 0 damage!");
-                System.out.println(to.getNAME() + " current HP is " + (int) to.getHP());
+                    System.out.println(to.getName() + " takes 0 damage!");
+                System.out.println(to.getName() + " current HP is " + (int) to.getHp());
                 break;
             case 1:
                 // defence
                 tmp = from.defUP();
-                System.out.println(from.getNAME() + " used Defence!");
-                System.out.println(from.getNAME() + "'s defence changed to " + (int) tmp);
+                System.out.println(from.getName() + " used Defence!");
+                System.out.println(from.getName() + "'s defence changed to " + (int) tmp);
                 break;
             case 2:
                 // power up
-                tmp = from.pwrUp();
-                System.out.println(from.getNAME() + " used Power Up!");
-                System.out.println(from.getNAME() + "'s attack changed to " + (int) tmp);
+                tmp = from.atkUp();
+                System.out.println(from.getName() + " used Power Up!");
+                System.out.println(from.getName() + "'s attack changed to " + (int) tmp);
                 break;
             case 3:
                 int r = (int) (Math.random() * 5);
                 if (r < 2) {
                     tmp = from.heal((int) (Math.random() * 21));
                     System.out
-                            .println(from.getNAME() + " healed for " + (int) tmp + " HP!");
-                    System.out.println(from.getNAME() + " current HP is " + (int) to.getHP());
+                            .println(from.getName() + " healed for " + (int) tmp + " HP!");
+                    System.out.println(from.getName() + " current HP is " + (int) to.getHp());
                 } else {
-                    System.out.println(from.getNAME() + " did nothing!");
+                    System.out.println(from.getName() + " did nothing!");
                 }
                 break;
         }
@@ -228,24 +228,24 @@ public class Game {
             case BUFF:
                 format = "%s%s%s%-20s%s%-8s%s%-7s%s%-7s%s%s\n";
                 System.out.printf(format,
-                        "[", (i + 2), "]: ", magics[menuCount * 3 + i].getNAME(), "Amount: ",
-                        magics[menuCount * 3 + i].getAMT(), "Cost: ",
-                        magics[menuCount * 3 + i].getCOST(), "Hit Chance: ",
+                        "[", (i + 2), "]: ", magics[menuCount * 3 + i].getName(), "Amount: ",
+                        magics[menuCount * 3 + i].getAmount(), "Cost: ",
+                        magics[menuCount * 3 + i].getCost(), "Hit Chance: ",
                         (double) magics[menuCount * 3 + i].getChance() / 10, "Buff Type: ",
-                        magics[menuCount * 3 + i].getBuffType());
+                        magics[menuCount * 3 + i].getBufftype());
                 break;
             case DMG:
                 System.out.printf(format,
-                        "[", (i + 2), "]: ", magics[menuCount * 3 + i].getNAME(), "Damage: ",
-                        magics[menuCount * 3 + i].getAMT(), "Cost: ",
-                        magics[menuCount * 3 + i].getCOST(), "Hit Chance: ",
+                        "[", (i + 2), "]: ", magics[menuCount * 3 + i].getName(), "Damage: ",
+                        magics[menuCount * 3 + i].getAmount(), "Cost: ",
+                        magics[menuCount * 3 + i].getCost(), "Hit Chance: ",
                         (double) magics[menuCount * 3 + i].getChance() / 10);
                 break;
             case HEAL:
                 System.out.printf(format,
-                        "[", (i + 2), "]: ", magics[menuCount * 3 + i].getNAME(), "Amount: ",
-                        magics[menuCount * 3 + i].getAMT(), "Cost: ",
-                        magics[menuCount * 3 + i].getCOST(), "Hit Chance: ",
+                        "[", (i + 2), "]: ", magics[menuCount * 3 + i].getName(), "Amount: ",
+                        magics[menuCount * 3 + i].getAmount(), "Cost: ",
+                        magics[menuCount * 3 + i].getCost(), "Hit Chance: ",
                         (double) magics[menuCount * 3 + i].getChance() / 10);
                 break;
         }
@@ -254,11 +254,11 @@ public class Game {
     // show stat
     public static void showDetail(Unit u) {
         String format = "%s%s%-3s%s%s%-10s%s%-3s%s%-3s\n";
-        System.out.printf(format, Colours.ANSI_PURPLE, "Lv.", (int) u.getLevel(), Colours.ANSI_RESET, " ", u.getNAME(),
-                "| ATK:", (int) u.getATK(), " DEF:", (int) u.getDEF());
-        int p = (int) Math.floor((u.getHP() / u.getMaxHP()) * 20);
+        System.out.printf(format, Colours.ANSI_PURPLE, "Lv.", (int) u.getLevel(), Colours.ANSI_RESET, " ", u.getName(),
+                "| ATK:", (int) u.getAtk(), " DEF:", (int) u.getDef());
+        int p = (int) Math.floor((u.getHp() / u.getMaxHp()) * 20);
         format = "%s%3s%s%s%s%s";
-        System.out.printf(format, "HP: ", (int) u.getHP(), "/", (int) u.getMaxHP(), Colours.ANSI_YELLOW, " [");
+        System.out.printf(format, "HP: ", (int) u.getHp(), "/", (int) u.getMaxHp(), Colours.ANSI_YELLOW, " [");
         for (int i = 0; i < 20; i++) {
             if (i < p)
                 System.out.print(Colours.ANSI_GREEN + "=" + Colours.ANSI_RESET);
@@ -277,20 +277,20 @@ public class Game {
     // show stat
     public static void showDetail(Player u) {
         String format = "%s%s%-3s%s%s%-10s%s%-3s%s%-3s\n";
-        System.out.printf(format, Colours.ANSI_PURPLE, "Lv.", (int) u.getLevel(), Colours.ANSI_RESET, " ", u.getNAME(),
-                "| ATK:", (int) u.getATK(), " DEF:", (int) u.getDEF());
-        int p = (int) Math.floor((u.getHP() / u.getMaxHP()) * 20);
+        System.out.printf(format, Colours.ANSI_PURPLE, "Lv.", (int) u.getLevel(), Colours.ANSI_RESET, " ", u.getName(),
+                "| ATK:", (int) u.getAtk(), " DEF:", (int) u.getDef());
+        int p = (int) Math.floor((u.getHp() / u.getMaxHp()) * 20);
         format = "%s%3s%s%s%s%s";
-        System.out.printf(format, "HP: ", (int) u.getHP(), "/", (int) u.getMaxHP(), Colours.ANSI_YELLOW, " [");
+        System.out.printf(format, "HP: ", (int) u.getHp(), "/", (int) u.getMaxHp(), Colours.ANSI_YELLOW, " [");
         for (int i = 0; i < 20; i++) {
             if (i < p)
                 System.out.print(Colours.ANSI_GREEN + "=" + Colours.ANSI_RESET);
             else
                 System.out.print(Colours.ANSI_RED + "-" + Colours.ANSI_RESET);
         }
-        p = (int) Math.floor((u.getMP() / u.getMaxMP()) * 20);
-        System.out.print(Colours.ANSI_YELLOW + "]" + Colours.ANSI_RESET + "  MP: " + (int) u.getMP() + "/"
-                + (int) u.getMaxMP() + Colours.ANSI_YELLOW + " [");
+        p = (int) Math.floor((u.getMp() / u.getMaxMp()) * 20);
+        System.out.print(Colours.ANSI_YELLOW + "]" + Colours.ANSI_RESET + "  MP: " + (int) u.getMp() + "/"
+                + (int) u.getMaxMp() + Colours.ANSI_YELLOW + " [");
         for (int i = 0; i < 20; i++) {
             if (i < p)
                 System.out.print(Colours.ANSI_CYAN + "=" + Colours.ANSI_RESET);
