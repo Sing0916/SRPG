@@ -7,6 +7,7 @@ import java.util.Scanner;
 import org.json.simple.parser.ParseException;
 
 import singRPG.classes.Magic;
+import singRPG.classes.entity.Player;
 import singRPG.system.MagicSystem;
 import singRPG.system.SaveSystem;
 import singRPG.system.Util;
@@ -23,7 +24,8 @@ public class TestRPG {
             System.out.println("[1] Create new player");
             System.out.println("[2] Create Magic");
             System.out.println("[3] List Magic");
-            int userAction = Util.checkUserAction(1, 3);
+            System.out.println("[4] Cheat EXP");
+            int userAction = Util.checkUserAction(1, 4);
             switch (userAction) {
                 case 1:
                     SaveSystem.create();
@@ -64,7 +66,23 @@ public class TestRPG {
                                 break;
                         }
                     }
-                    Util.pressAnyKey();
+                    break;
+                case 4:
+                    Util.clearScreen();
+                    System.out.println("[0] Back");
+                    System.out.println("Select player:");
+                    String names[] = SaveSystem.getPlayerList();
+                    for (int i = 0; i < names.length; i++) {
+                        System.out.println("[" + (i + 1) + "] " + names[i]);
+                    }
+                    userAction = Util.checkUserAction(0, names.length);
+                    Player[] players = SaveSystem.read();
+                    players[userAction - 1].setExp(9999999);
+                    Util.clearScreen();
+                    Util.printLine();
+                    System.out.println(names[userAction - 1] + " is god-like!");
+                    players[userAction - 1].updateLV();
+                    SaveSystem.write(players);
                     break;
             }
             Util.pressAnyKey();
