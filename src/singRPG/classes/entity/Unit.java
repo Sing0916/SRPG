@@ -29,6 +29,8 @@ public class Unit {
 
     public Unit(double health, double attack, double Defence, double mattack, double mdefence, String n,
             boolean isPlayer, double EXP) {
+        if (EXP < 100)
+            EXP = 100;
         maxHp = health + 10 * Math.floor(EXP / 100);
         oAtk = attack;
         oDef = Defence;
