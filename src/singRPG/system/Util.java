@@ -53,7 +53,8 @@ public class Util {
                         firstAction = false;
                     } else
                         clearLine(2);
-                    System.out.println("Invalid input!");
+                    System.out
+                            .println("Invalid input! Please enter a number between [" + start + "] to [" + end + "]!");
                 }
             } else {
                 if (firstAction) {
@@ -61,7 +62,7 @@ public class Util {
                     firstAction = false;
                 } else
                     clearLine(2);
-                System.out.println("Invalid input!");
+                System.out.println("Invalid input! Please enter a number between [" + start + "] to [" + end + "]!");
             }
         }
         return userAction;
@@ -70,19 +71,41 @@ public class Util {
     public static int checkUserAction(int start, int end, int opt1, int opt2) {
         int userAction = -1;
         boolean firstAction = true;
+        String input;
         while (true) {
-            userAction = scan.nextInt();
-            if (((userAction >= start) && (userAction <= end)) || (userAction == opt1) || (userAction == opt2)) {
-                if (!firstAction)
-                    clearLine(1);
-                break;
+            input = scan.nextLine();
+            if (StringUtils.isNumeric(input) && !StringUtils.equals(input, "")) {
+                userAction = Integer.parseInt(input);
+                if (((userAction >= start) && (userAction <= end)) || (userAction == opt1) || (userAction == opt2)) {
+                    if (!firstAction)
+                        clearLine(1);
+                    break;
+                } else {
+                    if (firstAction) {
+                        clearLine(1);
+                        firstAction = false;
+                    } else
+                        clearLine(2);
+                    if (end + 1 == opt1)
+                        System.out.println(
+                                "Invalid input! Please enter a number between [" + start + "] to [" + opt1 + "]!");
+                    else
+                        System.out.println("Invalid input! Please enter a number between [" + start + "] to [" + end
+                                + "] or [" + opt1 + "]!");
+                }
             } else {
                 if (firstAction) {
                     clearLine(1);
                     firstAction = false;
                 } else
                     clearLine(2);
-                System.out.println("Invalid input!");
+                if (end + 1 == opt1)
+                    System.out.println(
+                            "Invalid input! Please enter a number between [" + start + "] to [" + opt1 + "]!");
+                else
+                    System.out.println(
+                            "Invalid input! Please enter a number between [" + start + "] to [" + end + "] or [" + opt1
+                                    + "]!");
             }
         }
         return userAction;
