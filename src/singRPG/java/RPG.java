@@ -17,7 +17,7 @@ class RPG {
 
     public static void main(String[] args) throws ParseException, FileNotFoundException, IOException {
         Util.clearScreen();
-        Player[] players = SaveSystem.read();
+        Player[] players;
 
         // loop game
         outer: while (true) {
@@ -51,7 +51,7 @@ class RPG {
                 Util.clearScreen();
                 continue outer;
             }
-            userAction--;
+            players = SaveSystem.read();
             Unit enemy = new Unit(100, 5, 5, 0, 0, "Wolf", false,
                     (players[userAction].getLevel() - (Math.random() * 15 + 1)) * 100);
             Game game = new Game(players[userAction], enemy);

@@ -40,26 +40,5 @@
     "name": "Sing",
     "isEnemy": false,
     "shielded": false
-  },
-  {
-    "mp": 99999.0,
-    "maxMp": 99999.0,
-    "baseMp": 99999.0,
-    "hp": 1099989.0,
-    "atk": 199998.0,
-    "def": 199998.0,
-    "matk": 199998.0,
-    "mdef": 199998.0,
-    "maxHp": 1099989.0,
-    "oAtk": 99999.0,
-    "oDef": 99999.0,
-    "oMatk": 99999.0,
-    "oMdef": 99999.0,
-    "baseHp": 99999.0,
-    "exp": 9999999.0,
-    "level": 99999.0,
-    "name": "God",
-    "isEnemy": false,
-    "shielded": false
   }
 ]

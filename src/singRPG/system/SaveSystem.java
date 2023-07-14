@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
+
+import org.apache.commons.lang3.StringUtils;
 import org.json.simple.parser.ParseException;
 
 import com.google.gson.Gson;
@@ -56,10 +58,11 @@ public class SaveSystem {
         System.out.println("Enter 0 to escape to menu.");
         System.out.print("Name: ");
         String name = scan.nextLine();
-        if (Integer.parseInt(name) == 0)
+        System.out.print(gson.toJson(players, Player[].class));
+        if (StringUtils.equals(name, "0"))
             return 0;
         players[players.length - 1] = new Player(100.0, 10.0, 10.0, 20.0, 10.0, 100.0, name, true, 100);
-
+        System.out.print(gson.toJson(players, Player[].class));
         try {
             FileWriter file = new FileWriter("save/players.json");
             gson.toJson(players, Player[].class, file);

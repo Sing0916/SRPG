@@ -25,7 +25,8 @@ public class TestRPG {
             System.out.println("[2] Create Magic");
             System.out.println("[3] List Magic");
             System.out.println("[4] Cheat EXP");
-            int userAction = Util.checkUserAction(1, 4);
+            System.out.println("[5] Test");
+            int userAction = Util.checkUserAction(1, 5);
             switch (userAction) {
                 case 1:
                     SaveSystem.create();
@@ -83,6 +84,9 @@ public class TestRPG {
                     System.out.println(names[userAction - 1] + " is god-like!");
                     players[userAction - 1].updateLV();
                     SaveSystem.write(players);
+                    break;
+                case 5:
+                    SaveSystem.create();
                     break;
             }
             Util.pressAnyKey();
