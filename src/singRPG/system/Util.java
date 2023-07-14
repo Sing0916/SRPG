@@ -29,7 +29,7 @@ public class Util {
     public static void pressAnyKey() {
         System.out.println("Press enter to continue...");
         try {
-            System.in.read();
+            scan.nextLine();
         } catch (Exception e) {
             e.printStackTrace();
         }

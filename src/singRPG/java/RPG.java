@@ -1,10 +1,6 @@
 package singRPG.java;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
-
-import org.json.simple.parser.ParseException;
 import singRPG.classes.entity.Player;
 import singRPG.classes.entity.Unit;
 import singRPG.system.SaveSystem;
@@ -14,10 +10,11 @@ class RPG {
     static Scanner scan = new Scanner(System.in);
     static final String name = "SRPG";
     static int userAction = -1;
+    static boolean win = false;
+    static Player[] players;
 
-    public static void main(String[] args) throws ParseException, FileNotFoundException, IOException {
+    public static void main(String[] args) throws Exception {
         Util.clearScreen();
-        Player[] players;
 
         // loop game
         outer: while (true) {
@@ -51,27 +48,46 @@ class RPG {
                 Util.clearScreen();
                 continue outer;
             }
-            players = SaveSystem.read();
             userAction--;
-            Unit enemy = new Unit(100, 5, 5, 0, 0, "Wolf", false,
-                    (players[userAction].getLevel() - (Math.random() * 15 + 1)) * 100);
-            Game game = new Game(players[userAction], enemy);
-            Util.clearScreen();
-
-            // game start
-            boolean win = game.start();
-            if (win)
-                System.out.println("You win!");
-            else
-                System.out.println("You lose!");
-
-            // game end
-            players[userAction].updateLV();
-            System.out.println("EXP: " + (int) players[userAction].getExp() + "/"
-                    + (int) (players[userAction].getLevel() + 1) * 100);
-            SaveSystem.write(players);
-            Util.pressAnyKey();
-            Util.clearScreen();
+            while (true) {
+                loop();
+                Util.printLine();
+                System.out.println("Game ended, wish to continue?");
+                System.out.println("[0] Yes, let's go another round");
+                System.out.println("[1] No, get me out of here");
+                Util.printLine();
+                int leave = Util.checkUserAction(0, 1);
+                if (leave == 1) {
+                    Util.clearScreen();
+                    Util.printLine();
+                    System.out.println("Bye bye, see you later!");
+                    Util.printLine();
+                    break outer;
+                }
+            }
         }
+    }
+
+    public static void loop() throws Exception {
+        players = SaveSystem.read();
+        Unit enemy = new Unit(100, 5, 5, 0, 0, "Wolf", false,
+                (players[userAction].getLevel() - (Math.random() * 15 + 1)) * 100);
+        Game game = new Game(players[userAction], enemy);
+        Util.clearScreen();
+
+        // game start
+        win = game.start();
+        if (win)
+            System.out.println("You win!");
+        else
+            System.out.println("You lose!");
+
+        // game end
+        players[userAction].updateLV();
+        System.out.println("EXP: " + (int) players[userAction].getExp() + "/"
+                + (int) (players[userAction].getLevel() + 1) * 100);
+        SaveSystem.write(players);
+        Util.pressAnyKey();
+        Util.clearScreen();
     }
 }
