@@ -56,7 +56,7 @@ public class Game {
             }
 
             // enemy action
-            int r = (int) (Math.random() * 4);
+            int r = Util.random(4);
             enemyAction(r, enemy, player);
             if ((player.getHp() <= 0)) {
                 System.out.println("You are dead!");
@@ -136,7 +136,7 @@ public class Game {
                             from.getName() + " used " + magics[menuCount * 3 + userAction - 2].getName() + "!");
                     switch (magics[menuCount * 3 + userAction - 2].getMagicType()) {
                         case DMG:
-                            int r = (int) (Math.random() * 10);
+                            int r = Util.random(10);
                             if (r <= magics[menuCount * 3 + userAction - 2].getChance()) {
                                 tmp = to.takeDMG(magics[menuCount * 3 + userAction - 2].getAmount(), DmgType.MAG);
                                 from.useMagic(magics[menuCount * 3 + userAction - 2].getCost());
@@ -205,9 +205,9 @@ public class Game {
                 System.out.println(from.getName() + "'s attack changed to " + (int) tmp);
                 break;
             case 3:
-                int r = (int) (Math.random() * 5);
+                int r = Util.random(5);
                 if (r < 2) {
-                    tmp = from.heal((int) (Math.random() * 21));
+                    tmp = from.heal(Util.random(21));
                     System.out
                             .println(from.getName() + " healed for " + (int) tmp + " HP!");
                     System.out.println(from.getName() + " current HP is " + (int) to.getHp());

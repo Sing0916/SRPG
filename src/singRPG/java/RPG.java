@@ -70,8 +70,9 @@ class RPG {
 
     public static void loop() throws Exception {
         players = SaveSystem.read();
-        Unit enemy = new Unit(100, 5, 5, 0, 0, "Wolf", false,
-                (players[userAction].getLevel() - (Math.random() * 15 + 1)) * 100);
+        String[] enemyNames = SaveSystem.readEnemyNames();
+        Unit enemy = new Unit(100, 5, 5, 0, 0, enemyNames[Util.random(enemyNames.length)], false,
+                (players[userAction].getLevel() - (Util.random(15) + 1)) * 100);
         Game game = new Game(players[userAction], enemy);
         Util.clearScreen();
 

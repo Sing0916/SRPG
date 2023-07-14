@@ -1,5 +1,6 @@
 package singRPG.system;
 
+import java.util.Random;
 import java.util.Scanner;
 
 import org.apache.commons.lang3.StringUtils;
@@ -24,6 +25,11 @@ public class Util {
 
     public static void printLine() {
         System.out.println(Colours.ANSI_YELLOW + "-------------------------" + Colours.ANSI_RESET);
+    }
+
+    public static int random(int exclusiveUpperBound) {
+        Random rand = new Random();
+        return rand.nextInt(exclusiveUpperBound);
     }
 
     public static void pressAnyKey() {

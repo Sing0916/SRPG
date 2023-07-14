@@ -19,6 +19,12 @@ public class SaveSystem {
     static Scanner scan = new Scanner(System.in);
     static Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
 
+    public static String[] readEnemyNames() throws IOException {
+        FileReader file = new FileReader("config/enemyNames.json");
+        String[] names = gson.fromJson(file, String[].class);
+        return names;
+    }
+
     public static String[] getPlayerList() throws FileNotFoundException, IOException {
         FileReader file = new FileReader("save/players.json");
         Player[] players = gson.fromJson(file, Player[].class);

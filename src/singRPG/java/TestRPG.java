@@ -86,7 +86,6 @@ public class TestRPG {
                     SaveSystem.write(players);
                     break;
                 case 5:
-                    SaveSystem.create();
                     break;
             }
             Util.pressAnyKey();
