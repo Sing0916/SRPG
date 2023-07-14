@@ -70,6 +70,6 @@ public class SaveSystem {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return players.length - 1;
+        return players.length;
     }
 }
