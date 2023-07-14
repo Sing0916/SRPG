@@ -2,6 +2,8 @@ package singRPG.system;
 
 import java.util.Scanner;
 
+import org.apache.commons.lang3.StringUtils;
+
 import singRPG.constant.Colours;
 
 public class Util {
@@ -36,12 +38,23 @@ public class Util {
     public static int checkUserAction(int start, int end) {
         int userAction = -1;
         boolean firstAction = true;
+        String input;
         while (true) {
-            userAction = scan.nextInt();
-            if ((userAction >= start) && (userAction <= end)) {
-                if (!firstAction)
-                    clearLine(1);
-                break;
+            input = scan.nextLine();
+            if (StringUtils.isNumeric(input) && !StringUtils.equals(input, "")) {
+                userAction = Integer.parseInt(input);
+                if ((userAction >= start) && (userAction <= end)) {
+                    if (!firstAction)
+                        clearLine(1);
+                    break;
+                } else {
+                    if (firstAction) {
+                        clearLine(1);
+                        firstAction = false;
+                    } else
+                        clearLine(2);
+                    System.out.println("Invalid input!");
+                }
             } else {
                 if (firstAction) {
                     clearLine(1);
