@@ -3,6 +3,7 @@ package singRPG.java;
 import java.util.Scanner;
 import singRPG.classes.entity.Player;
 import singRPG.classes.entity.Unit;
+import singRPG.constant.Colours;
 import singRPG.system.SaveSystem;
 import singRPG.system.Util;
 
@@ -69,11 +70,27 @@ class RPG {
     }
 
     public static void loop() throws Exception {
+        Util.clearScreen();
+        Util.printLine();
         players = SaveSystem.read();
         String[] enemyNames = SaveSystem.readEnemyNames();
-        Unit enemy = new Unit(100, 5, 5, 0, 0, enemyNames[Util.random(enemyNames.length)], false,
-                (players[userAction].getLevel() - (Util.random(15) + 1)) * 100);
-        Game game = new Game(players[userAction], enemy);
+        Unit[] enemies = new Unit[3];
+        for (int i = 0; i < 3; i++) {
+            enemies[i] = new Unit(100, 5, 5, 0, 0, enemyNames[Util.random(enemyNames.length)], false,
+                    (players[userAction].getLevel() - (Util.random(15) + 1)) * 100);
+            showDetail(enemies[i]);
+        }
+        System.out.println("Choose 1 enemy to fight!");
+        String format = "%s%s%s%-3s%s%s%s\n";
+        System.out.printf(format, "[0] ", Colours.ANSI_PURPLE, "Lv.", (int) enemies[0].getLevel(), Colours.ANSI_RESET,
+                " ", enemies[0].getName());
+        System.out.printf(format, "[1] ", Colours.ANSI_PURPLE, "Lv.", (int) enemies[1].getLevel(), Colours.ANSI_RESET,
+                " ", enemies[1].getName());
+        System.out.printf(format, "[2] ", Colours.ANSI_PURPLE, "Lv.", (int) enemies[1].getLevel(), Colours.ANSI_RESET,
+                " ", enemies[2].getName());
+        int chooseEnemy = Util.checkUserAction(0, 2);
+
+        Game game = new Game(players[userAction], enemies[chooseEnemy]);
         Util.clearScreen();
 
         // game start
@@ -90,5 +107,27 @@ class RPG {
         SaveSystem.write(players);
         Util.pressAnyKey();
         Util.clearScreen();
+    }
+
+    public static void showDetail(Unit u) {
+        String format = "%s%s%-3s%s%s%-10s%s%-3s%s%-3s\n";
+        System.out.printf(format, Colours.ANSI_PURPLE, "Lv.", (int) u.getLevel(), Colours.ANSI_RESET, " ", u.getName(),
+                "| ATK:", (int) u.getAtk(), " DEF:", (int) u.getDef());
+        int p = (int) Math.floor((u.getHp() / u.getMaxHp()) * 20);
+        format = "%s%3s%s%s%s%s";
+        System.out.printf(format, "HP: ", (int) u.getHp(), "/", (int) u.getMaxHp(), Colours.ANSI_YELLOW, " [");
+        for (int i = 0; i < 20; i++) {
+            if (i < p)
+                System.out.print(Colours.ANSI_GREEN + "=" + Colours.ANSI_RESET);
+            else {
+                if ((p == 0) && (i == 0))
+                    System.out.print(Colours.ANSI_GREEN + "|" + Colours.ANSI_RESET);
+                else
+                    System.out.print(Colours.ANSI_RED + "-" + Colours.ANSI_RESET);
+            }
+        }
+        System.out.print(Colours.ANSI_YELLOW + "]");
+        System.out.println("");
+        Util.printLine();
     }
 }
