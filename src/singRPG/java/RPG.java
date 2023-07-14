@@ -86,7 +86,7 @@ class RPG {
                 " ", enemies[0].getName());
         System.out.printf(format, "[1] ", Colours.ANSI_PURPLE, "Lv.", (int) enemies[1].getLevel(), Colours.ANSI_RESET,
                 " ", enemies[1].getName());
-        System.out.printf(format, "[2] ", Colours.ANSI_PURPLE, "Lv.", (int) enemies[1].getLevel(), Colours.ANSI_RESET,
+        System.out.printf(format, "[2] ", Colours.ANSI_PURPLE, "Lv.", (int) enemies[2].getLevel(), Colours.ANSI_RESET,
                 " ", enemies[2].getName());
         int chooseEnemy = Util.checkUserAction(0, 2);
 
