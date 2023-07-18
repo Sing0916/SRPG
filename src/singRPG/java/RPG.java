@@ -76,7 +76,7 @@ class RPG {
         String[] enemyNames = SaveSystem.readEnemyNames();
         Unit[] enemies = new Unit[3];
         for (int i = 0; i < 3; i++) {
-            enemies[i] = new Unit(100, 5, 5, 0, 0, enemyNames[Util.random(enemyNames.length)], false,
+            enemies[i] = new Unit(enemyNames[Util.random(enemyNames.length)], false,
                     (players[userAction].getLevel() - (Util.random(15) + 1)) * 100);
             showDetail(enemies[i]);
         }
@@ -110,24 +110,9 @@ class RPG {
     }
 
     public static void showDetail(Unit u) {
-        String format = "%s%s%-3s%s%s%-10s%s%-3s%s%-3s\n";
+        String format = "%s%s%-3s%s%s%-10s%s%-3s%s%-4s%s%s\n";
         System.out.printf(format, Colours.ANSI_PURPLE, "Lv.", (int) u.getLevel(), Colours.ANSI_RESET, " ", u.getName(),
-                "| ATK:", (int) u.getAtk(), " DEF:", (int) u.getDef());
-        int p = (int) Math.floor((u.getHp() / u.getMaxHp()) * 20);
-        format = "%s%3s%s%s%s%s";
-        System.out.printf(format, "HP: ", (int) u.getHp(), "/", (int) u.getMaxHp(), Colours.ANSI_YELLOW, " [");
-        for (int i = 0; i < 20; i++) {
-            if (i < p)
-                System.out.print(Colours.ANSI_GREEN + "=" + Colours.ANSI_RESET);
-            else {
-                if ((p == 0) && (i == 0))
-                    System.out.print(Colours.ANSI_GREEN + "|" + Colours.ANSI_RESET);
-                else
-                    System.out.print(Colours.ANSI_RED + "-" + Colours.ANSI_RESET);
-            }
-        }
-        System.out.print(Colours.ANSI_YELLOW + "]");
-        System.out.println("");
+                "| ATK:", (int) u.getAtk(), " DEF:", (int) u.getDef(), "HP:", (int) u.getHp());
         Util.printLine();
     }
 }

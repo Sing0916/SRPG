@@ -27,28 +27,25 @@ public class Unit {
     public Unit() {
     }
 
-    public Unit(double health, double attack, double Defence, double mattack, double mdefence, String n,
-            boolean isPlayer, double EXP) {
+    public Unit(String n, boolean isPlayer, double EXP) {
         if (EXP < 100)
             EXP = 100;
-        maxHp = health + 10 * Math.floor(EXP / 100);
-        oAtk = attack;
-        oDef = Defence;
-        oMatk = mattack;
-        oMdef = mdefence;
+        exp = EXP;
+        level = Math.floor(exp / 100);
+
+        maxHp = 100 + 10 * level;
+        oAtk = 10 + 5 * level;
+        oDef = 10 + 5 * level;
+        oMatk = 10 + 5 * level;
+        oMdef = 10 + 5 * level;
 
         hp = maxHp;
-        atk = oAtk + 1 * Math.floor(EXP / 100);
-        def = oDef + 1 * Math.floor(EXP / 100);
-        matk = oMatk + 1 * Math.floor(EXP / 100);
-        mdef = oMdef + 1 * Math.floor(EXP / 100);
+        atk = oAtk;
+        def = oDef;
+        matk = oMatk;
+        mdef = oMdef;
 
-        if (EXP <= 0)
-            exp = 0;
-        else
-            exp = EXP;
-        level = Math.floor(exp / 100);
-        baseHp = health;
+        baseHp = maxHp;
         name = n;
         if (isPlayer)
             isEnemy = false;

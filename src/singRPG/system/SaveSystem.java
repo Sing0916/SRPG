@@ -67,7 +67,7 @@ public class SaveSystem {
         System.out.print(gson.toJson(players, Player[].class));
         if (StringUtils.equals(name, "0"))
             return 0;
-        players[players.length - 1] = new Player(100.0, 10.0, 10.0, 20.0, 10.0, 100.0, name, true, 100);
+        players[players.length - 1] = new Player(name, true, 100);
         System.out.print(gson.toJson(players, Player[].class));
         try {
             FileWriter file = new FileWriter("save/players.json");

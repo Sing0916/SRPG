@@ -5,12 +5,11 @@ public class Player extends Unit {
     double maxMp = 50;
     double baseMp = 50;
 
-    public Player(double health, double attack, double Defence, double mattack, double mdefence, double mp, String n,
-            boolean isPlayer, double EXP) {
-        super(health, attack, Defence, mattack, mdefence, n, isPlayer, EXP);
+    public Player(String n, boolean isPlayer, double EXP) {
+        super(n, isPlayer, EXP);
+        mp = 50 + 5 * level;
+        maxMp = mp;
         baseMp = mp;
-        maxMp = mp + 5 * Math.floor(EXP / 100);
-        mp = maxMp;
     }
 
     public Player() {
