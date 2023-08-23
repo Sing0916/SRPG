@@ -1,6 +1,6 @@
 ## Sing RPG
 
-A work in progress CLI-based rpg.
+A discontinued CLI-based rpg.
 
 ## Folder Structure
 
